@@ -1,3 +1,23 @@
+<?php 
+
+    ini_set('display_errors', '1');
+	ini_set('display_startup_errors', '1');
+	error_reporting(E_ALL);
+    
+    include "./inc/Phrase.php";
+    include "./inc/Game.php";
+    
+    $phrase = new Phrase("Hello guys", array());
+
+    // var_dump($phrase);
+
+    $game = new Game($phrase);
+    
+    echo $game->checkForWin();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +34,7 @@
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
     </div>
+
 </div>
 
 </body>
