@@ -9,11 +9,12 @@
     
     $phrase = new Phrase("Hello guys", array());
 
-    // var_dump($phrase);
-
     $game = new Game($phrase);
     
-    echo $game->checkForWin();
+
+    echo $game->displayKeyboard();
+
+	
 
 
 ?>
@@ -34,6 +35,9 @@
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
     </div>
+
+    
+
 
 </div>
 

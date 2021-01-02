@@ -5,7 +5,7 @@ class Game
     private $phrase;
     private $lives = 5;
 
-    public function __constructor($phrase)
+    public function __construct(Phrase $phrase)
     {
         $this->phrase = $phrase;
     }
@@ -37,20 +37,65 @@ class Game
 
         $selectedLetters = $_SESSION['selectedLetters'];
 
-
         $keyRow1 = array("q", "w", "e", "r", "t", "y", "u", "i", "o", "p");
         $keyRow2 = array("a", "s", "d", "f", "g", "h", "j", "k", "l");
         $keyRow3 = array("z", "x", "c", "v", "b", "n", "m");
 
+        // keyrow1
+        $htmlKeyRow1 = "<div class='keyrow'>";
         foreach($keyRow1 as $letter) {
-            if($phrase->checkLetter($letter, $this->phrase->currentPhrase)) {
-
+            if(!in_array($letter, $selectedLetters)) {
+                $htmlKeyRow1 .= "<button class='key' type='submit' name='key' value='" . $letter . "'>$letter</button>";
             } else {
-
+                if($this->phrase->checkLetter($letter, $this->phrase->currentPhrase)) {
+                    // If $letter is in $selectedLetters and in the currentPhrase
+                    $htmlKeyRow1 .= "<button class='key correct' disabled>$letter</button>";
+                } else {
+                    // If $letter is in $selectedLetters but not in the currentPhrase
+                    $htmlKeyRow1 .= "<button class='key incorrect' style='background-color: red' disabled>$letter</button>";
+                }
             }
-
         }
+        $htmlKeyRow1 .= "</div>";
 
+        // keyrow2
+        $htmlKeyRow2 = "<div class='keyrow'>";
+        foreach($keyRow2 as $letter) {
+            if(!in_array($letter, $selectedLetters)) {
+                $htmlKeyRow2 .= "<button class='key' type='submit' name='key' value='" . $letter . "'>$letter</button>";
+            } else {
+                if($this->phrase->checkLetter($letter, $this->phrase->currentPhrase)) {
+                    $htmlKeyRow2 .= "<button class='key correct' disabled>$letter</button>";
+                } else {
+                    $htmlKeyRow2 .= "<button class='key incorrect' style='background-color: red' disabled>$letter</button>";
+                }
+            }
+        }
+        $htmlKeyRow2 .= "</div>";
+
+        // keyrow3
+        $htmlKeyRow3 = "<div class='keyrow'>";
+        foreach($keyRow3 as $letter) {
+            if(!in_array($letter, $selectedLetters)) {
+                $htmlKeyRow3 .= "<button class='key' type='submit' name='key' value='" . $letter . "'>$letter</button>";
+            } else {
+                if($this->phrase->checkLetter($letter, $this->phrase->currentPhrase)) {
+                    $htmlKeyRow3 .= "<button class='key correct' disabled>$letter</button>";
+                } else {
+                    $htmlKeyRow3 .= "<button class='key incorrect' style='background-color: red' disabled>$letter</button>";
+                }
+            }
+        }
+        $htmlKeyRow3 .= "</div>";
+
+        // Build the main keyboard
+        $htmlKeyboard = "<form action='play.php' method='post'>";
+        $htmlKeyboard .= "<div id='qwerty' class='section'>";
+        $htmlKeyboard .= $htmlKeyRow1;
+        $htmlKeyboard .= $htmlKeyRow2;
+        $htmlKeyboard .= $htmlKeyRow3;
+        $htmlKeyboard .= "</div>";
+        $htmlKeyboard .= "</form>";
 
         return $htmlKeyboard;
     }

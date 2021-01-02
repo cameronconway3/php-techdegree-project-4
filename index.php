@@ -16,7 +16,5 @@
                 <input id="btn__reset" type="submit" value="Start Game" />
             </form>
 		</div>
-
-
 	</body>
 </html>

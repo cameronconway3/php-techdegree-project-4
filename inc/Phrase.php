@@ -3,10 +3,17 @@
 
 class Phrase
 {
-    private $currentPhrase;
-    private $selected = array();
+    public $currentPhrase;
+    public $selected = array();
+    public $phrases = array(
+        "Life is like a box of chocolates", 
+        "There is not trying", 
+        "May the force be with you", 
+        "You have to see the matrix for yourself", 
+        "You talking to me"
+    );
 
-    public function __construct($phrase = null, $selected)
+    public function __construct($phrase = null, $selected = array())
     {
         $this->setPhrase($phrase);
 
@@ -19,7 +26,8 @@ class Phrase
     public function setPhrase($phrase)
     {
         if(empty($phrase)) {
-            $this->currentPhrase = randomPhrase();
+            $randomIndex = array_rand($this->phrases);
+            $this->currentPhrase = $this->phrases[$randomIndex];
             $_SESSION['currentPhrase'] = randomPhrase();
         } else {
             $this->currentPhrase = $phrase;
