@@ -1,21 +1,42 @@
 <?php 
-
     ini_set('display_errors', '1');
-	ini_set('display_startup_errors', '1');
-	error_reporting(E_ALL);
-    
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+
+    session_start();
+
     include "./inc/Phrase.php";
     include "./inc/Game.php";
-    
-    $phrase = new Phrase("Hello guys", array());
 
+    // When start is submitted reset the $_SESSION variables
+    if (isset($_POST['start'])) {
+        unset($_SESSION['selected']);
+        unset($_SESSION['phrase']);
+    }
+
+    if (!isset($_SESSION["selected"])) {
+        $_SESSION["selected"] = array(); 
+    }
+
+    if(isset($_POST['key'])) {
+
+        // Store the chosen letter in a session called 'selected'
+        array_push($_SESSION['selected'], $_POST['key']);
+
+        $phrase = new Phrase($_SESSION['phrase'], $_SESSION['selected']);
+    } 
+
+    // var_dump($_SESSION['phrase']);
+    // var_dump($_SESSION['selected']);
+    
+
+    if(!isset($_SESSION['phrase'])){
+        $phrase = new Phrase();
+    }
+    
     $game = new Game($phrase);
-    
 
-    echo $game->displayKeyboard();
-
-	
-
+    $_SESSION['phrase'] = $phrase->currentPhrase;
 
 ?>
 
@@ -34,9 +55,14 @@
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
-    </div>
 
-    
+        <?php 
+            echo $phrase->addPhraseToDisplay();
+            echo $game->displayKeyboard();
+            echo $game->displayScore();
+        ?>
+
+    </div>
 
 
 </div>
