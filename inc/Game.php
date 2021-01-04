@@ -39,7 +39,7 @@ class Game
         $htmlKeyRow3 .= "</div>";
 
         // Build the keyboard as a form and add each key row to it
-        $htmlKeyboard = "<form action='play.php' method='post'>";
+        $htmlKeyboard = "<form action='play.php' method='post' class='keyboard-display'>";
         $htmlKeyboard .= "<div id='qwerty' class='section'>";
         $htmlKeyboard .= $htmlKeyRow1;
         $htmlKeyboard .= $htmlKeyRow2;

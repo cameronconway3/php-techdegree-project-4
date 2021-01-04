@@ -52,24 +52,23 @@
 </head>
 
 <body>
-<div class="main-container">
-    <div id="banner" class="section">
-        <h2 class="header">Phrase Hunter</h2>
+    <div class="main-container">
+        <div id="banner" class="section">
+            <h2 class="header">Phrase Hunter</h2>
 
-        <?php 
-            if(!$game->gameOver()) {
-                echo $phrase->addPhraseToDisplay();
-                echo $game->displayKeyboard();
-                echo $game->displayScore();
-            } else {
-                echo $game->gameOver();
-            }
-        ?>
+            <?php 
+                if(!$game->gameOver()) {
+                    echo $phrase->addPhraseToDisplay();
+                    echo $game->displayKeyboard();
+                    echo $game->displayScore();
+                } else {
+                    echo $game->gameOver();
+                }
+            ?>
 
+        </div>
     </div>
-
-
-</div>
+    <script src="./js/index.js"></script>
 
 </body>
 </html>
