@@ -88,9 +88,6 @@ class Game
             for($x = 1; $x <= $livesLost; $x++) {
                 $htmlScoreBoard .= "<li class='tries'><img src='images/lostHeart.png' height='35px' widght='30px'></li>";
             }
-        } else {
-            // Game Over
-            echo "game over";
         }
         $htmlScoreBoard .= "</ol>";
         $htmlScoreBoard .= "</div>";
@@ -111,7 +108,9 @@ class Game
     public function gameOver()
     {
         if($this->checkForLose()) {
-            $htmlLose = "<h1 id='game-over-message'>The phrase was: '" . $this->phraseObj->currentPhrase . "'. Better luck next time!</h1>";
+            $htmlLose = "<h1 id='game-over-message' style='color:white'>The phrase was: '" . $this->phraseObj->currentPhrase . "'. Better luck next time!</h1>";
+            $htmlLose .= "<script>document.getElementsByTagName('h2')[0].style.color='white'; </script>";
+            $htmlLose .= "<script>document.getElementsByTagName('body')[0].style.background='red'; </script>";
             $htmlLose .= "<form action='play.php' method='post'>";
             $htmlLose .= "<input id='btn__reset' type='submit' name='start' value='Restart Game' />";
             $htmlLose .= "</form>";
@@ -119,7 +118,9 @@ class Game
             return $htmlLose;
         }
         if($this->checkForWin()) {
-            $htmlWin = "<h1 id='game-over-message'>Congratulations on guessing: '" . $this->phraseObj->currentPhrase . "'</h1>";
+            $htmlWin = "<h1 id='game-over-message' style='color:white'>Congratulations on guessing: '" . $this->phraseObj->currentPhrase . "'</h1>";
+            $htmlWin .= "<script>document.getElementsByTagName('h2')[0].style.color='white'; </script>";
+            $htmlWin .= "<script>document.getElementsByTagName('body')[0].style.background='green';</script>";
             $htmlWin .= "<form action='play.php' method='post'>";
             $htmlWin .= "<input id='btn__reset' type='submit' name='start' value='Restart Game' />";
             $htmlWin .= "</form>";
