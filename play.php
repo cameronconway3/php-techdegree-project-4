@@ -57,9 +57,13 @@
         <h2 class="header">Phrase Hunter</h2>
 
         <?php 
-            echo $phrase->addPhraseToDisplay();
-            echo $game->displayKeyboard();
-            echo $game->displayScore();
+            if(!$game->gameOver()) {
+                echo $phrase->addPhraseToDisplay();
+                echo $game->displayKeyboard();
+                echo $game->displayScore();
+            } else {
+                echo $game->gameOver();
+            }
         ?>
 
     </div>
